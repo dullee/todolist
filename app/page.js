@@ -1,4 +1,9 @@
+"use client";
+import { useState } from "react";
+import { List } from "./_components/list.js";
+
 export default function Home() {
+
   return (
     <div className="flex flex-col flex-1 items-center bg-[rgba(243,244,246,1)] font-sans ">
       <main className="flex  flex-col items-center justify-between py-32 px-16 sm:items-start">
@@ -17,7 +22,7 @@ export default function Home() {
             </button>
           </div>
           <div className="flex gap-[6px] self-start ">
-            <button className="bg-[rgba(60,130,246,1)] p-1 rounded-md">
+            <button className="bg-[rgba(60,130,246,1)] p-1 rounded-md px-5">
               All
             </button>
             <button className="bg-[rgba(243,244,246,1)] text-[rgba(54,54,54,1)]  p-1 rounded-md">
@@ -26,6 +31,17 @@ export default function Home() {
             <button className="bg-[rgba(243,244,246,1)] text-[rgba(54,54,54,1)] p-1 rounded-md">
               Completed
             </button>
+          </div>
+          {false ? (
+            <div className="text-[rgba(107,114,128,1)]">
+              No tasks yet. Add one above!
+            </div>
+          ) : (
+            <List />
+          )}
+          <div className="text-[rgba(107,114,128,1)]">
+            Powered by
+            <span className="text-[rgba(59,115,237,1)]"> Pinecone academy</span>
           </div>
         </div>
       </main>
