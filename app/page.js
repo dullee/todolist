@@ -1,8 +1,17 @@
 "use client";
 import { useState } from "react";
-import { List } from "./_components/list.js";
+import List from "./_components/list.js";
 
 export default function Home() {
+  const [number, setNumber] = useState(0);
+  const handClick = () => {
+    setNumber(number + 1);
+  };
+
+  const [pressedButton, setPressedButton] = useState("all");
+  const pressButton = (button) => {
+    setPressedButton(button);
+  };
 
   return (
     <div className="flex flex-col flex-1 items-center bg-[rgba(243,244,246,1)] font-sans ">
@@ -11,24 +20,35 @@ export default function Home() {
           <h1 className="max-w-xs text-xl font-semibold leading-10 tracking-tight text-black text-center">
             To-do list
           </h1>
-          <div className=" flex gap-[6px]">
+          <button onClick={handClick}>add</button>
+          <p>{number}</p>
+          <div className=" flex gap-1.5">
             <input
               id="input"
-              className="bg-white text-black border-solid border-1 rounded-md border-[rgba(228,228,231,1)]"
+              className="bg-white text-black border-solid border  rounded-md border-[rgba(228,228,231,1)]"
               placeholder="Add a new task..."
             ></input>
             <button className="bg-[rgba(60,130,246,1)] p-1 rounded-md">
               Add
             </button>
           </div>
-          <div className="flex gap-[6px] self-start ">
-            <button className="bg-[rgba(60,130,246,1)] p-1 rounded-md px-5">
+          <div className="flex gap-1.5 self-start ">
+            <button
+              onClick={() => pressButton("all")}
+              className={`p-1 rounded-md px-5 ${pressedButton == "all" ? "bg-[#3c82f6]" : "bg-[#f3f4f6] "}`}
+            >
               All
             </button>
-            <button className="bg-[rgba(243,244,246,1)] text-[rgba(54,54,54,1)]  p-1 rounded-md">
+            <button
+              onClick={() => pressButton("active")}
+              className={`p-1 rounded-md px-5 ${pressedButton == "active" ? "bg-[#3c82f6]" : "bg-[#f3f4f6] "}`}
+            >
               Active
             </button>
-            <button className="bg-[rgba(243,244,246,1)] text-[rgba(54,54,54,1)] p-1 rounded-md">
+            <button
+              onClick={() => pressButton("completed")}
+              className={`p-1 rounded-md px-5 ${pressedButton == "completed" ? "bg-[#3c82f6]" : "bg-[#f3f4f6] "}`}
+            >
               Completed
             </button>
           </div>
