@@ -12,11 +12,6 @@ export default function Home() {
 
   const [data, setData] = useState([
     { id: 1, text: "task 1", completed: true },
-    // { id: 2, text: "task 2" },
-    // { id: 3, text: "task 2" },
-    // { id: 4, text: "task 2" },
-    // { id: 5, text: "task 2" },
-    // { id: 6, text: "task 2" },
   ]);
 
   const addTask = () => {
@@ -27,13 +22,16 @@ export default function Home() {
   };
 
   const removeTask = (taskId) => {
-    const updatedTasks = data.filter((task) => {
-      task && task.id !== taskId;
-    });
+    console.log(data.includes);
+
+    const updatedTasks = data.filter((task) => task.id !== taskId);
+
     setData(updatedTasks);
-    console.log(data);
   };
 
+  const test = () => {
+    console.log(data);
+  };
   const filteredTasks = data?.filter((task) => {
     if (filter === "active") {
       return !task.completed;
@@ -51,7 +49,7 @@ export default function Home() {
           <h1 className="max-w-xs text-xl font-semibold leading-10 tracking-tight text-black text-center">
             To-do list
           </h1>
-
+          <button onClick={() => test()}>Test</button>
           <div className=" flex gap-1.5">
             <input
               id="input"
