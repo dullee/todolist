@@ -1,13 +1,15 @@
 "use client";
+import { nanoid } from "nanoid";
 import { useState } from "react";
 import List from "./_components/list.js";
+import Alert from "./_components/alert.js";
 
 export default function Home() {
+  const [alertVisible, setAlertVisible] = useState(false);
   const [filter, setFilter] = useState("all");
   const [inputValue, setInputValue] = useState("");
-
   const [data, setData] = useState([
-    { id: 1, text: "task 1", completed: true },
+    { id: nanoid(), text: "task 1", completed: true },
   ]);
 
   const changeFilter = (filterString) => {
@@ -16,14 +18,12 @@ export default function Home() {
 
   const addTask = () => {
     if (!inputValue.trim()) return;
-
-    const newTask = { id: Date.now(), text: inputValue, completed: false };
+    const newTask = { id: nanoid(), text: inputValue, completed: false };
     setData([...data, newTask]);
   };
 
   const removeTask = (taskId) => {
     const updatedTasks = data.filter((task) => task.id !== taskId);
-
     setData(updatedTasks);
   };
 
@@ -39,13 +39,16 @@ export default function Home() {
 
   const getCompletedTasks = (tasks) => {
     const completedTasks = tasks.filter((task) => task.completed);
-
     return completedTasks.length;
   };
 
   const removeCompletedTasks = () => {
+
+    
+
     const nonCompletedTasks = data.filter((task) => !task.completed);
     setData(nonCompletedTasks);
+    setAlertVisible(false);
   };
 
   const test = () => {
@@ -124,11 +127,15 @@ export default function Home() {
               ))}
             </div>
           )}
+
+          {alertVisible ? (
+            <Alert onUserConfirmed={removeCompletedTasks} />
+          ) : null}
           <div className="flex justify-between text-xs  flex-row">
             {filteredTasks.length} of {getCompletedTasks(filteredTasks)} tasks
             completed
             <button
-              onClick={() => removeCompletedTasks()}
+              onClick={() => setAlertVisible(true)}
               className=" text-red-600"
             >
               Clear completed
