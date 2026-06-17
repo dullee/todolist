@@ -2,13 +2,11 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import List from "./_components/list.js";
-import Alert from "./_components/alert.js";
 
 export default function Home() {
-  const [alertVisible, setAlertVisible] = useState(false);
   const [filter, setFilter] = useState("all");
   const [inputValue, setInputValue] = useState("");
-  const [data, setData] = useState([,]);
+  const [data, setData] = useState([]);
 
   const changeFilter = (filterString) => {
     setFilter(filterString);
@@ -41,14 +39,16 @@ export default function Home() {
   };
 
   const removeCompletedTasks = () => {
-    const nonCompletedTasks = data.filter((task) => !task.completed);
-    setData(nonCompletedTasks);
-    setAlertVisible(false);
+    const userConfirmed = window.confirm(
+      "Are you sure you want to clear all completed tasks?",
+    );
+    if (userConfirmed) {
+      const nonCompletedTasks = data.filter((task) => !task.completed);
+      setData(nonCompletedTasks);
+    }
   };
 
-  const test = () => {
-    console.log(data);
-  };
+  const test = () => {};
 
   const filteredTasks = data.filter((task) => {
     if (filter === "active") {
@@ -127,7 +127,7 @@ export default function Home() {
                   tasks completed
                 </div>
                 <button
-                  onClick={() => setAlertVisible(true)}
+                  onClick={() => removeCompletedTasks()}
                   className="cursor-pointer text-red-600"
                 >
                   Clear completed
@@ -135,10 +135,6 @@ export default function Home() {
               </div>
             </div>
           )}
-
-          {alertVisible ? (
-            <Alert onUserConfirmed={removeCompletedTasks} />
-          ) : null}
 
           <div className="text-[rgba(107,114,128,1)] text-xs">
             Powered by

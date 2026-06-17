@@ -7,6 +7,8 @@ export default function List({ task, onToggle, onDelete }) {
       <div className="flex flex-row items-center gap-2.5">
         <input
           type="checkbox"
+          checked={task.completed}
+          readOnly
           onClick={() => onToggle(task.id)}
           className={`cursor-pointer w-5 h-5 border-[#767676] border rounded-xs`}
         ></input>
