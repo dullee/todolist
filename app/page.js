@@ -9,7 +9,7 @@ export default function Home() {
   const [filter, setFilter] = useState("all");
   const [inputValue, setInputValue] = useState("");
   const [data, setData] = useState([
-    { id: nanoid(), text: "task 1", completed: true },
+    {},
   ]);
 
   const changeFilter = (filterString) => {
@@ -52,7 +52,7 @@ export default function Home() {
     console.log(data);
   };
 
-  const filteredTasks = data?.filter((task) => {
+  const filteredTasks = data.filter((task) => {
     if (filter === "active") {
       return !task.completed;
     }
@@ -114,7 +114,7 @@ export default function Home() {
             </div>
           ) : (
             <div className="flex flex-col w-full gap-2.5 ">
-              {filteredTasks?.map((task) => (
+              {filteredTasks.map((task) => (
                 <List
                   key={task.id}
                   task={task}

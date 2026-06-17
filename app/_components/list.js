@@ -10,7 +10,7 @@ export default function List({ task, onToggle, onDelete }) {
           onClick={() => onToggle(task.id)}
           className={`cursor-pointer w-5 h-5 border-[#767676] border rounded-xs`}
         ></input>
-        <span className={task?.completed ? "line-through text-gray-400" : ""}>
+        <span className={task.completed ? "line-through text-gray-400" : ""}>
           {task.text}
         </span>
       </div>
