@@ -39,6 +39,8 @@ export default function Home() {
   };
 
   const removeCompletedTasks = () => {
+    if (!data.some((task) => task.completed)) return;
+
     const userConfirmed = window.confirm(
       "Are you sure you want to clear all completed tasks?",
     );
