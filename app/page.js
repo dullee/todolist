@@ -8,9 +8,7 @@ export default function Home() {
   const [alertVisible, setAlertVisible] = useState(false);
   const [filter, setFilter] = useState("all");
   const [inputValue, setInputValue] = useState("");
-  const [data, setData] = useState([
-    {},
-  ]);
+  const [data, setData] = useState([,]);
 
   const changeFilter = (filterString) => {
     setFilter(filterString);
